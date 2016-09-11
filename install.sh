@@ -13,7 +13,6 @@ g_config_files=($g_xresources $g_xinitrc $g_xserverrc $g_inputrc $g_xmodmap)
 # http://stackoverflow.com/questions/59895/can-a-bash-script-tell-which-directory-it-is-stored-in
 g_dotfiles_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-
 # Make symlinks for config files
 for filename in "${g_config_files[@]}"
 do
