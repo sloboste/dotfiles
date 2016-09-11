@@ -5,13 +5,6 @@ set -e
 # http://stackoverflow.com/questions/59895/can-a-bash-script-tell-which-directory-it-is-stored-in
 g_dotfiles_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# Setup tty solarized theme
-echo "Installing tty solarized theme..."
-g_dotprofile=".profile"
-g_ttytheme_dir="${g_dotfiles_dir}/tty-solarized"
-git clone https://github.com/joepvd/tty-solarized.git $g_ttytheme_dir
-ln -s "${g_dotfiles_dir}/${g_dotprofile}" "${HOME}/${g_dotprofile}"
-
 # Setup powerline fonts
 echo "Installing Powerline fonts..."
 g_font_dir="${g_dotfiles_dir}/fonts"
