@@ -2,6 +2,7 @@
 *faceName: Ubuntu Mono derivative Powerline:pixelsize=17
 *facesize: 13
 
+*cursorBlink: true
 
 
 ! Solarized color scheme for the X Window System
