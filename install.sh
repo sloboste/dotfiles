@@ -5,6 +5,16 @@ set -e
 # http://stackoverflow.com/questions/59895/can-a-bash-script-tell-which-directory-it-is-stored-in
 g_dotfiles_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+echo "Setting default editor to vim..."
+g_term_files=(".profile" ".bashrc")
+for filename in "${g_term_files[@]}"
+do
+    if [[ -f "${HOME}/$filename" ]]; then
+        echo "" >> "${HOME}/$filename"
+        echo "export EDITOR=vim" >> "${HOME}/$filename"
+    fi
+done
+
 # Setup powerline fonts
 echo "Installing Powerline fonts..."
 g_font_dir="${g_dotfiles_dir}/fonts"
