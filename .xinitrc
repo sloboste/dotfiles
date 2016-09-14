@@ -1,15 +1,15 @@
 #!/bin/bash
 
-keymapping="${HOME}/.Xmodmap"
+xmodmap="${HOME}/.Xmodmap"
 xresources="${HOME}/.Xresources"
 
 # Use my key remappings (swap caps lock and left control)
-if [[ -f $keymapping ]]; then
-    xmodmap $keymapping
+if [[ -f $xmodmap ]]; then
+    xmodmap $xmodmap
 fi
 
 # Load color scheme and font settings
-if [[ -f $keymapping ]]; then
+if [[ -f $xresources ]]; then
     xrdb -load $xresources
 fi
 
