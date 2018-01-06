@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+setxkbmap_path=/usr/bin/setxkbmap
+
+swapcaps() {
+    $setxkbmap_path -option "ctrl:swapcaps"
+}
+
+reset() {
+    $setxkbmap_path -option
+}
+
+swapaltwin() {
+    $setxkbmap_path -option "altwin:swap_alt_win"
+}
+
+swapaltctrl() {
+    $setxkbmap_path -option "ctrl:swap_lalt_lctl"
+}
+
+case "$1" in
+    laptop)
+        reset
+        swapcaps
+        # swapaltctrl
+        ;;
+    laptop_mac)
+        reset
+        swapcaps
+        swapaltwin
+        # swapaltctrl
+        ;;
+    desktop)
+        reset
+        # swapaltctrl
+        ;;
+    *)
+        echo "Usage: $0 <laptop|laptop_mac|desktop>"
+        exit -1
+esac
+
+exit 0

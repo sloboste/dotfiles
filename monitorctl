@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+{
+
+/usr/bin/touch /tmp/it_worked  # TODO remove
+
+set -e
+
+display_laptop="eDP-1"
+display_left="DP-2"
+display_right="DP-1"
+display_status_path="/sys/class/drm/card0-DISPLAY/status"
+
+left_display_status=$(cat ${display_status_path/DISPLAY/$display_left})
+right_display_status=$(cat ${display_status_path/DISPLAY/$display_right})
+
+display_laptop=${display_laptop/-/}
+display_left=${display_left/-/}
+display_right=${display_right/-/}
+
+if [[ $left_display_status == "connected"  && $right_display_status == "connected" ]]; then
+    /usr/bin/xrandr --output $display_laptop --off
+    /usr/bin/xrandr --output $display_left --auto
+    /usr/bin/xrandr --output $display_right --auto --right-of $display_left --primary
+elif [[ $left_display_status == "connected"  && $right_display_status == "disconnected" ]]; then
+    /usr/bin/xrandr --output $display_right --off
+    /usr/bin/xrandr --output $display_laptop --auto
+    /usr/bin/xrandr --output $display_left --auto --above $display_laptop --primary
+elif [[ $left_display_status == "disconnected"  && $right_display_status == "connected" ]]; then
+    /usr/bin/xrandr --output $display_left --off
+    /usr/bin/xrandr --output $display_laptop --auto
+    /usr/bin/xrandr --output $display_right --auto --above $display_laptop --primary
+else
+    /usr/bin/xrandr --output $display_left --off
+    /usr/bin/xrandr --output $display_right --off
+    /usr/bin/xrandr --output $display_laptop --auto --primary
+fi
+
+DISPLAY=":0" /usr/bin/i3-nagbar -t warning -m "$display_left $left_display_status; $display_right $right_display_status" > /dev/null 2>&1
+
+} &

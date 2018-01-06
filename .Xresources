@@ -4,6 +4,8 @@
 
 *cursorBlink: true
 
+! Macbook Retina DPI fix for apps. Note that i3wm font sizes are still small.
+! Xft.dpi: 192
 
 ! Solarized color scheme for the X Window System
 !

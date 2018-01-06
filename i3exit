@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+# https://faq.i3wm.org/question/239/how-do-i-suspendlockscreen-and-logout.1.html
+
+lock()
+{
+    # i3lock -eft -i ~/Pictures/wallpaper.png
+    i3lock -eft -c 333333
+}
+
+case "$1" in
+    lock)
+    lock
+    ;;
+    logout)
+    i3-msg exit
+    ;;
+    suspend)
+    lock && systemctl suspend
+    ;;
+    hibernate)
+    lock && systemctl hibernate
+    ;;
+    reboot)
+    systemctl reboot
+    ;;
+    shutdown)
+    systemctl poweroff
+    ;;
+    *)
+    echo "Usage: $0 <lock|logout|suspend|hibernate|reboot|shutdown>"
+    exit -1
+esac
+
+exit 0
