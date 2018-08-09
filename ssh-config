@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+set -e
+
+function usage {
+    echo "Usage: ssh-config <office | remote>"
+}
+
+function main {
+    if [ -z "${1}" ]; then
+        usage
+        return 1
+    fi
+
+    branch="${1}"
+
+    case "${branch}" in
+        "office" | "remote")
+            ;;
+        *)
+            usage
+            return 1
+            ;;
+    esac
+
+    cd "${HOME}/.ssh/ssh-config"
+    git checkout "${branch}"
+    make fix-perm
+
+    return 0
+}
+
+main "${@}"
