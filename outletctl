@@ -33,6 +33,13 @@ function main {
     local outlet="${1}"
     local action="${2}"
 
+    change_power_state "${outlet}" "${action}"
+}
+
+function change_power_state {
+    local outlet="${1}"
+    local action="${2}"
+
     if [[ "${outlet}" -lt 1 || "${outlet}" -gt 8 ]]; then
         echo "ERROR: Outlet must be between 1 and 8"
         usage
@@ -57,4 +64,6 @@ function main {
     esac
 }
 
-main "$@"
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    main "$@"
+fi
