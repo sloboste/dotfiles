@@ -1,1 +1,2 @@
-# dotfiles
+# DEPRECATED
+Replaced by dotconfig
